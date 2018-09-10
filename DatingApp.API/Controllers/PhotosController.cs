@@ -84,6 +84,8 @@ namespace DatingApp.API.Controllers
 
             if(userFromRepo.Photos.Any(u => u.IsMain))
                 photo.IsMain = false;
+            else
+                photo.IsMain = true;
 
             userFromRepo.Photos.Add(photo);
 
