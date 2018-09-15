@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BsDropdownModule, TabsModule, BsDatepickerModule, PaginationModule, ButtonsModule } from 'ngx-bootstrap';
+import { BsDropdownModule, TabsModule, BsDatepickerModule, PaginationModule, ButtonsModule, ModalModule } from 'ngx-bootstrap';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
 import { NgxGalleryModule } from 'ngx-gallery';
@@ -33,6 +33,12 @@ import { PhotoEditorComponent } from './members/photo-editor/photo-editor.compon
 import { ListsResolver } from './_resolvers/lists.resolver';
 import { MessagesResolver } from './_resolvers/messages-resolver';
 import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
+import { HasRoleDirective } from './_directives/hasRole.directive';
+import { UserManagementComponent } from './admin/user-management/user-management.component';
+import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
+import { AdminService } from './_services/admin.service';
+import { RolesModalComponent } from './admin/roles-modal/roles-modal.component';
 
 export function tokenGetter() {
     return localStorage.getItem('token');
@@ -53,6 +59,11 @@ export function tokenGetter() {
        PhotoEditorComponent,
        TimeAgoPipe,
        MemberMessagesComponent,
+       AdminPanelComponent,
+       HasRoleDirective,
+       PhotoManagementComponent,
+       UserManagementComponent,
+       RolesModalComponent
     ],
     imports: [
        BrowserModule,
@@ -64,6 +75,7 @@ export function tokenGetter() {
        TabsModule.forRoot(),
        PaginationModule.forRoot(),
        ButtonsModule.forRoot(),
+       ModalModule.forRoot(),
        RouterModule.forRoot(appRoutes),
        NgxGalleryModule,
        FileUploadModule,
@@ -87,6 +99,10 @@ export function tokenGetter() {
        ListsResolver,
        PreventUnsavedChanges,
        MessagesResolver,
+       AdminService,
+    ],
+    entryComponents: [
+        RolesModalComponent
     ],
     bootstrap: [
        AppComponent
